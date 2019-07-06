@@ -1,5 +1,4 @@
-var listaPatos = {"localhost": 'localhost',
-				  "rashodakuin": '10.42.0.144'};
+var listaPatos = {};
 
 var patoActual = ["nombreA", "ipA"];
 var patoPrevio = ["nombreP", "ipP"];
@@ -37,7 +36,7 @@ function cargarVistaPatos(){
 	$("#cargandoPatos").hide(); //ocultar loading
 	$("#listaPatos").text("");
 	for (pato in listaPatos){
-		$("#listaPatos").append('<li><div class="form-inline"><img src="/img/off.png"/><div class="cajaNombrePatoLista" id='+pato+'>'+'<div class="F">'+pato+'</div></div><div class="float-right X" id='+pato+'X>X</div></div></li>'); //mostrar lista patos
+		$("#listaPatos").append('<li><div class="form-inline"><img src="/img/on.png"/><div class="cajaNombrePatoLista" id='+pato+'>'+'<div class="F">'+pato+'</div></div><div class="float-right X" id='+pato+'X>X</div></div></li>'); //mostrar lista patos
 
 		$("#"+pato).click(function() {
 			try{
