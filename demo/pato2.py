@@ -2,6 +2,7 @@
 
 import cv2
 import rospy #importar ros para python
+from time import sleep
 from duckietown_msgs.msg import Twist2DStamped # importar mensajes de ROS tipo String y tipo Int32
 
 
@@ -9,7 +10,7 @@ class Simulador(object):
 	def __init__(self, args):
 		super(Simulador, self).__init__()
 		self.args = args
-		self.publisher = rospy.Publisher("/enzo/wheels_driver_node/car_cmd", Twist2DStamped, queue_size=10)
+		self.publisher = rospy.Publisher("/pato2/wheels_driver_node/car_cmd", Twist2DStamped, queue_size=10)
 		self.twist = Twist2DStamped()
 		
 		nothing = lambda x: x
@@ -36,9 +37,10 @@ class Simulador(object):
 			self.twist.omega = angular
 			
 			self.publisher.publish(self.twist)
+			sleep(0.01)
 
 def main():
-	rospy.init_node('simulador') #creacion y registro del nodo!
+	rospy.init_node('pato2') #creacion y registro del nodo!
 
 	obj = Simulador('args') # Crea un objeto del tipo Simulador, cuya definicion se encuentra arriba
 
