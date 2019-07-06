@@ -11,11 +11,8 @@ $(function() {
 
 	$("#addIP").click(function() {
 		nombre = $("#nombrePato").val();
-		ip = $("#ip").val();
+        agregarPato(nombre,'localhost');
 
-		if (ValidateIPaddress(ip)) {
-			agregarPato(nombre, ip);
-		}
 	});
 
 });
@@ -32,7 +29,7 @@ function ValidateIPaddress(ipaddress) {  // https://stackoverflow.com/a/27434991
 }
 
 function agregarPato(nombre, ip){
-	listaPatos[nombre] = ip;
+	listaPatos[nombre] = 'localhost';
 	cargarVistaPatos();
 }
 
@@ -43,17 +40,19 @@ function cargarVistaPatos(){
 		$("#listaPatos").append('<li><div class="form-inline"><img src="/img/off.png"/><div class="cajaNombrePatoLista" id='+pato+'>'+'<div class="F">'+pato+'</div></div><div class="float-right X" id='+pato+'X>X</div></div></li>'); //mostrar lista patos
 
 		$("#"+pato).click(function() {
+			try{
+			speed.unsubscribe();
 			pato = this.id;
 			$("#duckiebotN").text(pato);
-			ipPato = listaPatos[pato];
-			conectarPato(ipPato);
-
-			patoPrevio = new Array(patoActual[0], patoActual[1]);
-			patoActual[0] = pato;
-			patoActual[1] = ipPato;
-
-			console.log(patoPrevio);
-			console.log(patoActual);
+			conectarPato("localhost",pato);
+		}
+			catch(error){ 
+			pato = this.id;
+			$("#duckiebotN").text(pato);
+			conectarPato("localhost",pato);
+	
+		}
+			
 		});
 
 		$("#"+pato+"X").click(function() {

@@ -1,10 +1,10 @@
 // ROSLIB
 
-function suscribirVelocidad(ros) {
+function suscribirVelocidad(ros,duckiebots) {
 
   speed = new ROSLIB.Topic({
   ros: ros,
-  name: '/duckiebot/wheels_driver_node/car_cmd',
+  name: '/'+ duckiebots +'/wheels_driver_node/car_cmd',
   messageType : 'duckietown_msgs/Twist2DStamped'
 });
 
@@ -48,7 +48,7 @@ camara.subscribe(function(message) {
 };
 
 
-function conectarPato(ip) {
+function conectarPato(ip,nombre) {
 
 //si hay pato conectado, desconectarlo
   try {
@@ -69,7 +69,7 @@ function conectarPato(ip) {
 
   ros.on('connection', function() {
     $("#"+patoActual[0]).prev().attr("src", "/img/on.png");
-    console.log('Connectado a ' + ipPato);
+    console.log('Connectado a localhost');
   });
 
   ros.on('error', function(error) {
@@ -77,6 +77,6 @@ function conectarPato(ip) {
     console.log('Error connecting to websocket server: ', error);
   });
 
-  suscribirVelocidad(ros);
+  suscribirVelocidad(ros,nombre);
   suscribirCamara(ros);
 };

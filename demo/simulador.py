@@ -9,7 +9,7 @@ class Simulador(object):
 	def __init__(self, args):
 		super(Simulador, self).__init__()
 		self.args = args
-		self.publisher = rospy.Publisher("/duckiebot/wheels_driver_node/car_cmd", Twist2DStamped, queue_size=10)
+		self.publisher = rospy.Publisher("/enzo/wheels_driver_node/car_cmd", Twist2DStamped, queue_size=10)
 		self.twist = Twist2DStamped()
 		
 		nothing = lambda x: x
